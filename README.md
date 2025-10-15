@@ -23,6 +23,16 @@ Before running the project, ensure you have:
 * SMTP credentials (Gmail, Outlook, etc.) for email notifications
 * Modern web browser (Chrome, Edge, Firefox)
 
+#### NuGet Packages
+
+To install required NuGet packages, run the following commands in the terminal inside your project folder:
+
+```bash
+# PostgreSQL provider for Entity Framework Core
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+
+# MailKit for sending emails
+dotnet add package MailKit
 ---
 
 ## Getting Started
