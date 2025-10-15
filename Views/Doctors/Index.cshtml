@@ -1,0 +1,89 @@
+@model IEnumerable<SanVicenteHospital.Models.Doctor>
+
+@{
+    ViewData["Title"] = "Doctors";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary fw-bold">Doctor Management</h2>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Add New Doctor
+        </a>
+    </div>
+    
+    @if (TempData["message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill"></i>
+            @TempData["message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    
+    <form method="get" asp-action="Index" class="mb-4">
+        <div class="row align-items-end">
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Filter by Specialty</label>
+                <select name="specialty" class="form-select">
+                    <option value="">All specialties</option>
+                    @foreach (var s in ViewBag.Specialties as List<string>)
+                    {
+                        <option value="@s" selected="@(s == ViewBag.SelectedSpecialty)">
+                            @s
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary mt-3">
+                    <i class="bi bi-search"></i> Filter
+                </button>
+            </div>
+        </div>
+    </form>
+    
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped table-hover shadow-sm">
+            <thead class="table-primary">
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Document</th>
+                    <th>Specialty</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var doctor in Model)
+                {
+                    <tr>
+                        <td>@doctor.id</td>
+                        <td>@doctor.fullname</td>
+                        <td>@doctor.document</td>
+                        <td>@doctor.specialty</td>
+                        <td>@doctor.email</td>
+                        <td>@doctor.phone</td>
+                        <td class="text-center">
+                            <a asp-action="Edit" asp-route-id="@doctor.id" class="btn btn-warning btn-sm me-2">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <a asp-action="Destroy" asp-route-id="@doctor.id" class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info text-center mt-4">
+            No doctors found. Try selecting another specialty.
+        </div>
+    }
+</div>

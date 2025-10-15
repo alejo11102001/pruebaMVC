@@ -1,0 +1,55 @@
+@model SanVicenteHospital.Models.Appointment
+
+@{
+    ViewData["Title"] = "Create Appointment";
+}
+
+<div class="container mt-5">
+    <h2 class="text-primary fw-bold mb-4">Schedule a New Appointment</h2>
+
+    @if (TempData["error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            <i class="bi bi-exclamation-triangle-fill"></i> @TempData["error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    
+    <form asp-action="Store" method="post" class="card shadow-sm p-4">
+        <div class="mb-3">
+            <label class="form-label">Select Patient</label>
+            <select asp-for="patientid" class="form-select" required>
+                <option value="">-- Choose Patient --</option>
+                @foreach (var patient in ViewBag.Patients)
+                {
+                    <option value="@patient.id">@patient.fullname</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Select Doctor</label>
+            <select asp-for="doctorid" class="form-select" required>
+                <option value="">-- Choose Doctor --</option>
+                @foreach (var doctor in ViewBag.Doctors)
+                {
+                    <option value="@doctor.id">@doctor.fullname - @doctor.specialty</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Date and Time</label>
+            <input asp-for="appointmentdate" type="datetime-local" class="form-control" required />
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left-circle"></i> Back
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-calendar-check"></i> Save Appointment
+            </button>
+        </div>
+    </form>
+</div>

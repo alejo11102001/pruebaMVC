@@ -1,0 +1,45 @@
+@model IEnumerable<SanVicenteHospital.Models.EmailHistory>
+
+<div class="container mt-4">
+    <h2>Mailing History</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info mt-3">No emails have been sent yet.</div>
+    }
+    else
+    {
+        <table class="table table-striped table-bordered mt-3">
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Appointment</th>
+                <th>Status</th>
+                <th>Sent At</th>
+                <th>Message</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var email in Model)
+            {
+                <tr>
+                    <td>@email.id</td>
+                    <td>@email.appointmentid</td>
+                    <td>
+                        @if (email.status == "Sent")
+                        {
+                            <span class="badge bg-success">Enviado</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">No enviado</span>
+                        }
+                    </td>
+                    <td>@email.sentat.ToLocalTime()</td>
+                    <td>@email.message</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>

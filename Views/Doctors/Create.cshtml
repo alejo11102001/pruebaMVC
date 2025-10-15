@@ -1,0 +1,54 @@
+@model SanVicenteHospital.Models.Doctor
+
+@{
+    ViewData["Title"] = "Add New Doctor";
+}
+
+<div class="container mt-5">
+    <h2 class="text-success fw-bold mb-4">Add New Doctor</h2>
+
+    <form asp-action="Store" method="post" asp-controller="Doctors" class="shadow p-4 rounded bg-light">
+        <div class="mb-3">
+            <label asp-for="fullname" class="form-label">Full Name</label>
+            <input asp-for="fullname" class="form-control" placeholder="Enter patient's full name" />
+            <span asp-validation-for="fullname" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="document" class="form-label">Document Number</label>
+            <input asp-for="document" class="form-control" placeholder="Enter ID number" />
+            <span asp-validation-for="document" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="specialty" class="form-label">Specialty</label>
+            <input asp-for="specialty" class="form-control" placeholder="Enter specialty" />
+            <span asp-validation-for="specialty" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="email" class="form-label">Email</label>
+            <input asp-for="email" class="form-control" placeholder="example@email.com" />
+            <span asp-validation-for="email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="phone" class="form-label">Phone</label>
+            <input asp-for="phone" class="form-control" placeholder="Enter phone number" />
+            <span asp-validation-for="phone" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left-circle"></i> Back to List
+            </a>
+            <button class="btn btn-success">
+                <i class="bi bi-save"></i> Save Doctor
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
